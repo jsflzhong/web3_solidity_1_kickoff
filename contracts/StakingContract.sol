@@ -24,7 +24,7 @@ contract StakingContract is Ownable {
     event Staked(address indexed user, uint256 amount);
     event Withdrawn(address indexed user, uint256 amount, uint256 reward);
 
-    constructor(IERC20 _stakingToken, uint256 _rewardRate) {
+    constructor(IERC20 _stakingToken, uint256 _rewardRate) Ownable(msg.sender) {
         stakingToken = _stakingToken;
         rewardRate = _rewardRate;
     }
