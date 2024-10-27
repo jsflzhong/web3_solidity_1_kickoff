@@ -18,7 +18,7 @@ contract MyNFT is ERC721, Ownable {
     event NFTMinted(address recipient, uint256 tokenId, string tokenURI);
 
     // 构造函数，初始化NFT名称和符号
-    constructor() ERC721("MyNFT", "MNFT") {
+    constructor() ERC721("MyNFT", "MNFT") Ownable(msg.sender){
          _currentTokenId = 0; // 初始化 tokenId
     }
 
