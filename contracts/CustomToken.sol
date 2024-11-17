@@ -4,3 +4,13 @@
 
 //业务场景：企业希望发行自己的代币，用于奖励生态系统中的用户，并允许代币持有者在系统内支付或进行投票。
 //User Journey：企业发行代币，用户可以通过平台获取代币，并在平台中使用代币进行支付或投票。
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomToken is ERC20, Ownable {
+
+    constructor(string memory name, string memory symbol, uint256 initialSupply) Ownable(msg.sender){
+        _mint(msg.sender, initialSupply*(10**decimals()));
+    }
+}
