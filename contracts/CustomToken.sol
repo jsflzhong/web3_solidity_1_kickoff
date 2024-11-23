@@ -8,9 +8,10 @@
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+//Extend from 2 father Contract, which are ERC20 and Ownable 
 contract CustomToken is ERC20, Ownable {
-
-    constructor(string memory name, string memory symbol, uint256 initialSupply) Ownable(msg.sender){
+    
+    constructor(string memory name, string memory symbol, uint256 initialSupply) ERC20(name, symbol) Ownable(msg.sender){
         _mint(msg.sender, initialSupply*(10**decimals()));
     }
 
