@@ -20,7 +20,7 @@ contract CustomToken is ERC20, Ownable {
     }
 
     // Burn token, can be only called by the owner
-    function burn() external onlyOwner {
-        
+    function burn(address from, uint256 amount) external onlyOwner {
+        _burn(from, amount);
     }
 }
