@@ -13,4 +13,11 @@ contract CustomToken is ERC20, Ownable {
     constructor(string memory name, string memory symbol, uint256 initialSupply) Ownable(msg.sender){
         _mint(msg.sender, initialSupply*(10**decimals()));
     }
+
+    // Mint new token, can be only called by the owner
+    function mint(address to, uint256 amount) external onlyOwner{
+        _mint(to, amount);
+    }
+
+
 }
