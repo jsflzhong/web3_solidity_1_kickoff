@@ -22,4 +22,17 @@ contract NFTMarketplace is Ownable {
     constructor() Ownable (msg.sender) {
     }
 
+    struct Listing {
+        address seller;
+        uint256 price;
+    }
+
+    //Store the info of saling for each NFT
+    mapping(address => mapping(uint256 => Listing)) public listings;
+    uint256 public listingFee = 0.01 ether;
+    //Manuel reentrancy guard
+    bool private locked;
+
+    
+
 }
