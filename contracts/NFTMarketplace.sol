@@ -23,16 +23,17 @@ contract NFTMarketplace is Ownable {
     }
 
     struct Listing {
-        address seller;
-        uint256 price;
+        address seller; //Seller's address
+        uint256 price; //Token's price
     }
 
     //Store the info of saling for each NFT
+    //Token address => (TokenId => Listing)
     mapping(address => mapping(uint256 => Listing)) public listings;
     uint256 public listingFee = 0.01 ether;
     //Manuel reentrancy guard
     bool private locked;
 
-    
+    event NFTListed(address seller, address indexed nftContract, uint indexed tokenId, uint256 price);
 
 }
