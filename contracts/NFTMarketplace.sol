@@ -34,6 +34,9 @@ contract NFTMarketplace is Ownable {
     //Manuel reentrancy guard
     bool private locked;
 
-    event NFTListed(address seller, address indexed nftContract, uint indexed tokenId, uint256 price);
+    event NFTListed(address indexed seller, address indexed nftContract, uint indexed tokenId, uint256 price);
+    event NFTSold(address indexed buyer, address indexed nftContract, uint indexed tokenId, uint256 price);
+    event NFTDelisted(address indexed seller, address indexed nftContract, uint indexed tokenId);
 
+    
 }
