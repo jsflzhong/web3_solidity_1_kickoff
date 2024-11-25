@@ -47,9 +47,22 @@ contract NFTMarketplace is Ownable {
     }
 
     //List NFT for sale
-    function listNFT(address nftContract, uint256 tokenId, uint256 price) external payable nonReentrant(){
+    function listNFT(address nftContractAddress, uint256 tokenId, uint256 price) external payable nonReentrant(){
         require(msg.value == listingFee, "You need to pay the listing fee");
         require(price > 0, "Price must me greater than 0");
+        //Turn contract address to IERC721, so that it can call a lot of standard functions.
+        IERC721 nftContract = IERC721(nftContractAddress);
+        //Authorize the owner of NFT, to avoid ppl without owner to list NFT that they don't own.
+        require(nftContract.ownerOf(tokenId) == msg.sender, "You must be the owner of the NFT");
         
+        //Save NFT sale info
+        //[nftContractAddress][tokenId] : the unique info of a NFT.
+        //This data structure is used to save the connection of NFT and it's sale info, for easly management.
+        listings[nftContractAddress][tokenId] = Listing({
+            seller : msg.sender,
+            price : price
+        });
+
+        emit NFTListed(msg.sender, nftContractAddress, tokenId, price);
     }
 }
