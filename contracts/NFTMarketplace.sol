@@ -38,5 +38,11 @@ contract NFTMarketplace is Ownable {
     event NFTSold(address indexed buyer, address indexed nftContract, uint indexed tokenId, uint256 price);
     event NFTDelisted(address indexed seller, address indexed nftContract, uint indexed tokenId);
 
-    
+    //Define a modifier to protect the function from reEntrant attack.
+    modifier nonReentrant() {
+        require(!locked, "ReentrantGuard: reentrant call is not allowed for this function");
+        locked = true;
+        _;
+        locked = false;
+    }
 }
