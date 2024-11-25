@@ -65,4 +65,9 @@ contract NFTMarketplace is Ownable {
 
         emit NFTListed(msg.sender, nftContractAddress, tokenId, price);
     }
+
+    //Set Listing Fee, can be only called by the owner of contract
+    function setListingFee(uint256 newListingFee) external onlyOwner {
+        listingFee = newListingFee;
+    }
 }
