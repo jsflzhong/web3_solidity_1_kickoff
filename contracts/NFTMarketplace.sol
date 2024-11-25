@@ -45,4 +45,11 @@ contract NFTMarketplace is Ownable {
         _;
         locked = false;
     }
+
+    //List NFT for sale
+    function listNFT(address nftContract, uint256 tokenId, uint256 price) external payable nonReentrant(){
+        require(msg.value == listingFee, "You need to pay the listing fee");
+        require(price > 0, "Price must me greater than 0");
+        
+    }
 }
