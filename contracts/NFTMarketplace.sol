@@ -70,4 +70,14 @@ contract NFTMarketplace is Ownable {
     function setListingFee(uint256 newListingFee) external onlyOwner {
         listingFee = newListingFee;
     }
+
+    //Delist NFT
+    function delistNFT(address nftContractAddress, uint256 tokenId) external {
+        Listing memory listing = listings[nftContractAddress][tokenId];
+        require(listing.seller == msg.sender, "You are not the seller");
+        
+        delete listings[nftContractAddress][tokenId];
+
+        emit NFTDelisted(msg.sender, nftContract, tokenId);
+    }
 }
