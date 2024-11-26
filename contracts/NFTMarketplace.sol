@@ -73,11 +73,17 @@ contract NFTMarketplace is Ownable {
 
     //Delist NFT
     function delistNFT(address nftContractAddress, uint256 tokenId) external {
+        //This variable is just used for comparson, no need to persistent, so that using memory here to save the gas fee.
         Listing memory listing = listings[nftContractAddress][tokenId];
         require(listing.seller == msg.sender, "You are not the seller");
         
         delete listings[nftContractAddress][tokenId];
 
         emit NFTDelisted(msg.sender, nftContractAddress, tokenId);
+    }
+
+    // Withdraw funds from the NFT contract, only callable by the contract owner
+    function withdraw() external onlyOwner {
+        
     }
 }
