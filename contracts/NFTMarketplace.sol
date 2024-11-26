@@ -84,6 +84,6 @@ contract NFTMarketplace is Ownable {
 
     // Withdraw funds from the NFT contract, only callable by the contract owner
     function withdraw() external onlyOwner {
-        
+        payable(owner()).transfer(address(this).balance);
     }
 }
