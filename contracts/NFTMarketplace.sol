@@ -78,6 +78,6 @@ contract NFTMarketplace is Ownable {
         
         delete listings[nftContractAddress][tokenId];
 
-        emit NFTDelisted(msg.sender, nftContract, tokenId);
+        emit NFTDelisted(msg.sender, nftContractAddress, tokenId);
     }
 }
