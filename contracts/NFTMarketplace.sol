@@ -97,10 +97,14 @@ contract NFTMarketplace is Ownable {
         address sellerAddress = listing.seller;
 
         //Transfer funds to seller
+        payable(sellerAddress).transfer(listing.price);
 
         //Transfer NFT to buyer
+        nftContract.safeTransferFrom(sellerAddress, msg.sender, tokenId);
 
         //Remove NFT from listings
-        
+        delete listings[NFTContractAddress][tokenId];
+
+        emit NFTSold(msg.sender, NFTContractAddress, tokenId, listing.price);
     }
 }
