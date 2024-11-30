@@ -66,7 +66,7 @@ contract NFTMarketplace is Ownable {
         emit NFTListed(msg.sender, nftContractAddress, tokenId, price);
     }
 
-    //Set Listing Fee, can be only called by the owner of contract
+    //Set/Update Listing Fee, can be only called by the owner of contract
     function setListingFee(uint256 newListingFee) external onlyOwner {
         listingFee = newListingFee;
     }
@@ -85,5 +85,10 @@ contract NFTMarketplace is Ownable {
     // Withdraw funds from the NFT contract, only callable by the contract owner
     function withdraw() external onlyOwner {
         payable(owner()).transfer(address(this).balance);
+    }
+
+    //Purchase a NFT
+    function buyNFT(address NFTContractAddress, uint256 tokenId) external payable nonReentrant {
+        
     }
 }
