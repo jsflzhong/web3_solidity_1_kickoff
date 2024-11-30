@@ -89,6 +89,18 @@ contract NFTMarketplace is Ownable {
 
     //Purchase a NFT
     function buyNFT(address NFTContractAddress, uint256 tokenId) external payable nonReentrant {
+        Listing memory listing = listings[NFTContractAddress][tokenId];
+        require(listing.price > 0, "This NFT is not for sale");
+        require(msg.value > listing.price, "Insufficient payment");
+
+        IERC721 nftContract = IERC721(NFTContractAddress);
+        address sellerAddress = listing.seller;
+
+        //Transfer funds to seller
+
+        //Transfer NFT to buyer
+
+        //Remove NFT from listings
         
     }
 }
