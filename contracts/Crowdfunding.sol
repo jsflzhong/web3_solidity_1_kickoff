@@ -29,6 +29,8 @@ contract Crowdfunding is Ownable{
     //Record each one's contributios
     mapping(address => uint256) public contributions;
 
-    
+    event ContributionReceived(address contributor, uint256 amount);
+    event FundRaiserSuccessful(uint256 totalRaisedAmount);
+    event FundRaiseFailed();
 
 }
