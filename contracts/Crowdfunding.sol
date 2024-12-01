@@ -18,5 +18,17 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Crowdfunding is Ownable{
 
+    IERC20 public token;
+    //Target amount
+    uint256 public goal;
+    //Crowdfunded amount
+    uint256 public totalRised;
+    //The deadline for crowdfunding 
+    uint256 public deadline;
+
+    //Record each one's contributios
+    mapping(address => uint256) public contributions;
+
     
+
 }
