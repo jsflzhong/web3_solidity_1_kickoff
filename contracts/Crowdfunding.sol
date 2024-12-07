@@ -72,4 +72,11 @@ contract Crowdfunding is Ownable{
         token.transfer(owner(), totalRaised);
     }
 
+    function claimRefund() external{
+        require(block.timestamp >= deadline, "Crowdfunding not ended yet");
+        require(totalRaised < goal, "Crowdfunding goal reached");
+
+        
+    }
+
 }
