@@ -72,11 +72,16 @@ contract Crowdfunding is Ownable{
         token.transfer(owner(), totalRaised);
     }
 
+    //When CrowedFund timeout and the goal is not reached (failed), then refund token back to contributors.
     function claimRefund() external{
         require(block.timestamp >= deadline, "Crowdfunding not ended yet");
         require(totalRaised < goal, "Crowdfunding goal reached");
 
-        
+        uint256 contributedAmount = contributions[msg.sender];
+        require(contributedAmount > 0, "No contributions");
+
+        contributions[msg.sender] = 0;
+        token.transfer(msg.sender, contributedAmount);
     }
 
 }
