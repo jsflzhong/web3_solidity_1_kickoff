@@ -25,8 +25,16 @@ contract TokenDistribution is Ownable{
 
     event tokenDistributed(address recipient, uint256 amount);
 
+    //Gas费优化：使用批量转移减少多次调用带来的开销
     function distributeTokens(address[] calldata recipients, uint256[] calldata amounts) external onlyOwner(){
+        require(recipients.length == amounts.length, "Mismatch between recipients and amounts");
 
+        for(uint256 i=0; i<recipients.length; i++) {
+            require(amounts[i] > 0,"Amount must be greater than zero");
+            token.transfer(recipients[i], amounts[i]);
+            //透明性：每次代币分发都会触发事件，便于审计和跟踪。
+            emit tokenDistributed(recipients[i], amounts[i]);
+        }
     }
 
 }
