@@ -9,3 +9,24 @@
 User Journey：
 用户能够看到他们的分发记录，并确保及时收到代币奖励。
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TokenDistribution is Ownable{
+    IERC20 public token;
+
+    constructor(IERC20 _token) Ownable(msg.sender){
+        token = _token;
+    }
+
+    event tokenDistributed(address recipient, uint256 amount);
+
+    function distributeTokens(address[] calldata recipients, uint256[] calldata amounts) external onlyOwner(){
+
+    }
+
+}
